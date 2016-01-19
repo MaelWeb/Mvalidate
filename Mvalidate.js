@@ -3,7 +3,8 @@
  *  Male.Liang
  *
  */
-;(function($) {
+;
+(function($) {
     function ValidVal(form, opts) {
         this.form = form;
         this.options = opts;
@@ -16,7 +17,7 @@
 
     ValidVal.prototype = {
         // 添加验证规则
-        addValidations: function( obj ) {
+        addValidations: function(obj) {
             var _defaultValidations = this.defaultValidations;
 
             for (var key in obj) {
@@ -26,81 +27,105 @@
             return this;
         },
         // 验证
-        validate : function( opts ) {
+        validate: function(opts) {
             var self = this;
 
             self.getData();
 
             var _validateRules = self.defaultValidations,
                 _data = self.data;
-            if ( !opts ) {
+            if (!opts) {
                 self.errorFlag = [];
                 this.form.find("[data-vali]").each(function() {
                     var _val = $(this).val(),
                         _key = $(this).attr("data-vali");
-                    if (_key && !_validateRules[_key]( _val )) {
+                    if (_key && !_validateRules[_key](_val)) {
                         // if (this.options.error && typeof this.options.error === 'function') {
                         //     this.options.error();
                         // }
-                        $(this).closest(".wipos-input")
-                            .addClass("has-error")
-                            .removeClass("has-success");
+                        $(this).css({
+                            "border-width": "1px",
+                            "border-color": "#a94442",
+                            "outline": "none",
+                            "-webkit-box-shadow": "inset 0 1px 1px rgba(0,0,0,.075),0 0 6px #ce8483",
+                            "box-shadow": "inset 0 1px 1px rgba(0,0,0,.075),0 0 6px #ce8483"
+                        });
 
                         self.errorFlag.push(false);
-                    }  else {
-                        $(this).closest(".wipos-input")
-                            .addClass("has-success")
-                            .removeClass("has-error");
+                    } else {
+                        $(this).css({
+                            "border-width": "1px",
+                            "border-color": "#2b542c",
+                            "outline": "none",
+                            "-webkit-box-shadow": "inset 0 1px 1px rgba(0,0,0,.075),0 0 6px #67b168",
+                            "box-shadow": "inset 0 1px 1px rgba(0,0,0,.075),0 0 6px #67b168"
+                        });
 
                         self.errorFlag.push(true);
                     }
                 });
-            } else if ($.type( opts ) === 'array') {
+            } else if ($.type(opts) === 'array') {
                 self.errorFlag = [];
-                for (var i = 0; i < opts.length; i++ ) {
+                for (var i = 0; i < opts.length; i++) {
                     var _key = opts[i],
-                        validator = this.form.find("[name="+ _key + "]").length ? this.form.find("[name="+ _key + "]") : this.form.find("[data-vali="+ _key + "]");
+                        validator = this.form.find("[name=" + _key + "]").length ? this.form.find("[name=" + _key + "]") : this.form.find("[data-vali=" + _key + "]");
 
                     validator.each(function() {
                         var _val = $(this).val(),
                             valiRul = $(this).attr("data-vali");
-                       if (valiRul && !_validateRules[valiRul]( _val )) {
+                        if (valiRul && !_validateRules[valiRul](_val)) {
                             // if (this.options.error && typeof this.options.error === 'function') {
                             //     this.options.error();
                             // }
-                            $(this).closest(".wipos-input")
-                                .addClass("has-error")
-                                .removeClass("has-success");
+                            $(this).css({
+                                "border-width": "1px",
+                                "border-color": "#a94442",
+                                "outline": "none",
+                                "-webkit-box-shadow": "inset 0 1px 1px rgba(0,0,0,.075),0 0 6px #ce8483",
+                                "box-shadow": "inset 0 1px 1px rgba(0,0,0,.075),0 0 6px #ce8483"
+                            });
 
                             self.errorFlag.push(false);
-                        }  else {
-                            $(this).closest(".wipos-input")
-                                .addClass("has-success")
-                                .removeClass("has-error");
+                        } else {
+                            $(this).css({
+                                "border-width": "1px",
+                                "border-color": "#2b542c",
+                                "outline": "none",
+                                "-webkit-box-shadow": "inset 0 1px 1px rgba(0,0,0,.075),0 0 6px #67b168",
+                                "box-shadow": "inset 0 1px 1px rgba(0,0,0,.075),0 0 6px #67b168"
+                            });
 
                             self.errorFlag.push(true);
                         }
                     });
                 }
-            } else if($.type(opts) === 'string') {
-                var validator = this.form.find("[name="+ opts + "]").length ? this.form.find("[name="+ opts + "]") : this.form.find("[data-vali="+ opts + "]");
+            } else if ($.type(opts) === 'string') {
+                var validator = this.form.find("[name=" + opts + "]").length ? this.form.find("[name=" + opts + "]") : this.form.find("[data-vali=" + opts + "]");
                 self.errorFlag = [];
                 validator.each(function() {
                     var _val = $(this).val(),
                         valiRul = $(this).attr("data-vali");
-                   if (valiRul && !_validateRules[valiRul]( _val )) {
+                    if (valiRul && !_validateRules[valiRul](_val)) {
                         // if (this.options.error && typeof this.options.error === 'function') {
                         //     this.options.error();
                         // }
-                        $(this).closest(".wipos-input")
-                            .addClass("has-error")
-                            .removeClass("has-success");
+                        $(this).css({
+                            "border-width": "1px",
+                            "border-color": "#a94442",
+                            "outline": "none",
+                            "-webkit-box-shadow": "inset 0 1px 1px rgba(0,0,0,.075),0 0 6px #ce8483",
+                            "box-shadow": "inset 0 1px 1px rgba(0,0,0,.075),0 0 6px #ce8483"
+                        });
 
                         self.errorFlag.push(false);
-                    }  else {
-                        $(this).closest(".wipos-input")
-                            .addClass("has-success")
-                            .removeClass("has-error");
+                    } else {
+                        $(this).css({
+                            "border-width": "1px",
+                            "border-color": "#2b542c",
+                            "outline": "none",
+                            "-webkit-box-shadow": "inset 0 1px 1px rgba(0,0,0,.075),0 0 6px #67b168",
+                            "box-shadow": "inset 0 1px 1px rgba(0,0,0,.075),0 0 6px #67b168"
+                        });
 
                         self.errorFlag.push(true);
                     }
@@ -112,7 +137,7 @@
             return self.errorFlag.indexOf(false) == -1 ? _data : false;
         },
         // 获取表单值
-        getData : function(key, val) {
+        getData: function(key, val) {
             var _data = this.data;
             if (!key && !val) {
                 this.form.find("[name]").each(function() {
@@ -120,7 +145,7 @@
                         field = $this.attr("name"),
                         _val = $this.val();
                     //if (_val) {
-                        _data[field] = _val;
+                    _data[field] = _val;
                     //}
                 });
             } else {
@@ -131,17 +156,17 @@
             this.form.find(".wipos-input").removeClass("has-error has-success");
         },
         // 事件绑定
-        _bindEvents : function() {
+        _bindEvents: function() {
             var self = this;
             this.form.find('[name]').bind({
-                change:  function() {
+                change: function() {
                     var $this = $(this),
-                        _formCheck = $this.attr("data-vali"),
+                        _validateRule = $this.attr("data-vali"),
                         _name = $this.attr("name"),
                         _val = $this.val();
 
-                    if (_formCheck) {
-                        _name ? self.validate(_name) : self.validate(_formCheck);
+                    if (_validateRule) {
+                        _name ? self.validate(_name) : self.validate(_validateRule);
                     }
 
                 },
@@ -154,11 +179,11 @@
             });
         },
         // 默认验证规则
-        defaultValidations : {
+        defaultValidations: {
             'number': function(v) {
                 v = stripWhitespace(v);
                 if (v.length == 0) {
-                    return true;
+                    return false;
                 }
                 if (isNaN(v)) {
                     return false;
@@ -170,6 +195,14 @@
                     return false;
                 }
                 var r = /^([a-zA-Z0-9_\.\-+])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+
+                return r.test(v);
+            },
+            'mobile': function(v) {
+                if (v.length == 0) {
+                    return false;
+                }
+                var r = /^0?(13|15|17|18|14)[0-9]{9}$/;
 
                 return r.test(v);
             },
@@ -191,7 +224,7 @@
                 return r.test(v);
             },
             "notNull": function(v) {
-                 if (v.length == 0) {
+                if (v.length == 0) {
                     return false;
                 }
 
@@ -207,9 +240,17 @@
                     v = "http://" + v;
                 }
                 return v.match(/^(http\:\/\/|https\:\/\/)(.{4,})$/);
+            },
+            'regexp': function(v, r) {
+                if (v.length == 0) {
+                    return false;
+                }
+                r = r.match(/REG\:(\S+)/)[1];
+
+                return v.test(r);
             }
         },
-        _init : function() {
+        _init: function() {
             this._bindEvents();
         }
     };
@@ -244,5 +285,10 @@
             str = str.split(r[i]).join('');
         }
         return str;
+    }
+
+    function trim(str) {
+        var reExtraSpace = /^\s*(.*?)\s+$/;
+        return str.replace(reExtraSpace, "$1");
     }
 })(jQuery);
