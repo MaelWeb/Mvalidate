@@ -32,12 +32,13 @@ var validateForm = new Malidate($("form"));
 
 自带验证规则： number, email, mobile(只验证手机号) ,tel(可通时时验证手机、座机、400、800服务号),password, notNull, url
 
-1. ［data-vali］－－ 验证规则；［name］－－ 表单键值名， 不设置该属性不影响验证。但是返回的表单数据中将不包含该项。
-2. 验证函数： .validate(option)
-    @option:  null 不传入option时，验证所有项；
-        {array} 传入数组时验证数组中包含项；
-        {string} 传入string时只验证单项;
-3. 添加验证规则： .addValidations(object)
+1. ［data-vali］－－ 验证规则；  
+   ［name］－－ 表单键值名， 不设置该属性不影响验证。但是返回的表单数据中将不包含该项。  
+2. 验证函数： .validate(option)  
+    @option:  null 不传入option时，验证所有项；   
+        {array} 传入数组时验证数组中包含项；  
+        {string} 传入string时只验证单项;   
+3. 添加验证规则： .addValidations(object)  
 ```javascript
 .addValidations({
     IDcard: function(v) {
